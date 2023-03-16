@@ -1,5 +1,5 @@
-from sqlalchemy.orm import registry, relationship
-from sqlalchemy import Column, String, Integer, create_engine, ForeignKey
+from sqlalchemy.orm import registry, relationship, Session
+from sqlalchemy import Column, String, Integer, create_engine, ForeignKey, select
 
 engine = create_engine(
     'mysql+mysqlconnector://root:password@localhost:3306/books',
@@ -48,14 +48,14 @@ Base.metadata.create_all(engine)
 
 def add_book(book:Book, author:Author):
     with Session(engine) as session:
-        existing_book = session.execute(select(Book).filter(Book.title==title, Book.number_of_pages==number_of_pages)).scalar()
+        existing_book = session.execute(select(Book).filter(Book.title==book.title, Book.number_of_pages==book.number_of_pages)).scalar()
         if existing_book is not None:
             print("Book has already been added.")
             return
         print("Book does not exist. Adding book")
         session.add(book)
 
-        existing_author = session.execute(select(Author).filter(Author.first_name==first_name, Author.last_name==last_name)).scalar()
+        existing_author = session.execute(select(Author).filter(Author.first_name==author.first_name, Author.last_name==author.last_name)).scalar()
         if existing_author is not None:
             print("Author has already been added")
             session.flush()
