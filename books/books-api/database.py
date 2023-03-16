@@ -45,3 +45,43 @@ class BookAuthor(Base):
                   .format(self.bookauthor_id, self.author_id, self.book_id, self.author.first_name, self.author.last_name, self.book.title)
 
 Base.metadata.create_all(engine)
+
+def add_book(book:Book, author:Author):
+    with Session(engine) as session:
+        existing_book = session.execute(select(Book).filter(Book.title==title, Book.number_of_pages==number_of_pages)).scalar()
+        if existing_book is not None:
+            print("Book has already been added.")
+            return
+        print("Book does not exist. Adding book")
+        session.add(book)
+
+        existing_author = session.execute(select(Author).filter(Author.first_name==first_name, Author.last_name==last_name)).scalar()
+        if existing_author is not None:
+            print("Author has already been added")
+            session.flush()
+            pairing = BookAuthor(author_id=existing_author.author_id, book_id=book.book_id)
+        else:
+            print("Author does not exist! Adding author")
+            session.add(author)
+            session.flush()
+            pairing = BookAuthor(author_id=author.author_id, book_id=book.book_id)
+
+        session.add(pairing)
+        session.commit()
+        print("New pairing added " + str(pairing))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
