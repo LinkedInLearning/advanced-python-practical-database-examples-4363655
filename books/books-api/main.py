@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from . import schemas
 from . import database
 
@@ -7,6 +7,14 @@ app = FastAPI()
 @app.get("/")
 def get_root():
 	return "Welcome to the books api"
+
+@app.get("/book/{book_id}")
+def retrieve_book(book_id:int):
+	try:
+		return database.get_book(book_id)
+	except Exception as e:
+		print(e)
+		raise HTTPException(status_code=404, detail=repr(e))
 
 @app.post("/book/")
 def create_book(request: schemas.BookAuthorPayload):

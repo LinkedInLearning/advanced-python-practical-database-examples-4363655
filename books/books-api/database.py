@@ -70,7 +70,14 @@ def add_book(book:Book, author:Author):
         session.commit()
         print("New pairing added " + str(pairing))
 
-
+def get_book(book_id: int):
+    with Session(engine) as session:
+        book = session.execute(select(Book).filter(Book.book_id==book_id)).scalar()
+        if book is None:
+            raise Exception("Book does not exist")
+        pairing = session.execute(select(BookAuthor).filter(BookAuthor.book_id==book_id)).scalar()
+        author = session.execute(select(Author).filter(Author.author_id==pairing.author_id)).scalar()
+        return (book, author)
 
 
 
