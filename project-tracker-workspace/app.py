@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -32,8 +32,14 @@ def show_tasks(project_id):
 
 @app.route("/add/project", methods=['POST'])
 def add_project():
-	# TODO: Add project
-	return "Project added successfully"
+	if not request.form['project-title']:
+		flash("Enter a title for your new project", "red")
+	else:
+		project = Project(title=request.form['project-title'])
+		db.session.add(project)
+		db.session.commit()
+		flash("Project added successfully", "green")
+	return redirect(url_for('show_projects'))
 
 @app.route("/add/task/<project_id>", methods=['POST'])
 def add_task(project_id):
