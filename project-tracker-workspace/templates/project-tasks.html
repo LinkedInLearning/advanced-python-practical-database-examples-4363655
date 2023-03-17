@@ -1,5 +1,18 @@
 <html>
 	<body>
 		<h1>Project {{project_id}}'s Tasks</h1>
+		<ul>
+			<li>Task 1</li>
+			<li>Task 2</li>
+			<li>Task 3</li>
+		</ul>
+
+		<h3>Add new task</h3>
+		<form action="/add/task/{{project_id}}" method="POST">
+			Task: <input type="text" name="task-name">
+			<br>
+			<br>
+			<input type="submit" value="Add Task">
+		</form>
 	</body>
 </html>
