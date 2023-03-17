@@ -43,8 +43,14 @@ def add_project():
 
 @app.route("/add/task/<project_id>", methods=['POST'])
 def add_task(project_id):
-	# TODO: Add task
-	return "Task added successfully"
+	if not request.form['task-name']:
+		flash("Enter a description for your new task", "red")
+	else:
+		task = Task(description=request.form['task-name'], project_id=project_id)
+		db.session.add(task)
+		db.session.commit()
+		flash("Task added successfullly", "green")
+	return redirect(url_for('show_tasks', project_id=project_id))
 
 
 app.run(debug=True, host="127.0.0.1", port=3000)
