@@ -11,13 +11,15 @@ class Project(db.Model):
 	project_id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(length=50))
 
+	task = db.relationship("Task", back_populates="project", cascade="all, delete-orphan")
+
 class Task(db.Model):
 	__tablename__ = 'tasks'
 	task_id = db.Column(db.Integer, primary_key=True)
 	project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
 	description = db.Column(db.String(length=50))
 
-	project = db.relationship("Project")
+	project = db.relationship("Project", back_populates="task")
 
 #Define a route
 @app.route("/")
@@ -52,5 +54,20 @@ def add_task(project_id):
 		flash("Task added successfullly", "green")
 	return redirect(url_for('show_tasks', project_id=project_id))
 
+@app.route("/delete/task/<task_id>", methods=['POST'])
+def delete_task(task_id):
+	#Delete task
+	pending_delete_task = Task.query.filter_by(task_id=task_id).first()
+	original_project_id = pending_delete_task.project.project_id
+	db.session.delete(pending_delete_task)
+	db.session.commit()
+	return redirect(url_for('show_tasks', project_id=original_project_id))
+
+@app.route("/delete/project/<project_id>", methods=['POST'])
+def delete_project(project_id):
+	pending_delete_project = Project.query.filter_by(project_id=project_id).first()
+	db.session.delete(pending_delete_project)
+	db.session.commit()
+	return redirect(url_for("show_projects"))
 
 app.run(debug=True, host="127.0.0.1", port=3000)
