@@ -1,9 +1,14 @@
-# COURSENAME
-This is the repository for the LinkedIn Learning course `course-name`. The full course is available from [LinkedIn Learning][lil-course-url].
+# Advanced Python: Practical Database Examples
+This is the repository for the LinkedIn Learning course Advanced Python: Practical Database Examples. The full course is available from [LinkedIn Learning][lil-course-url].
 
-![course-name-alt-text][lil-thumbnail-url] 
+![Advanced Python: Practical Database Examples][lil-thumbnail-url] 
 
-_See the readme file in the main branch for updated instructions and information._
+Looking for a hands-on opportunity to take your Python skills to the next level? In this course, instructor Kathryn Hodge takes you through a series of practical database examples to help level up your Python applications.
+
+Learn how to create an API that serves data from a database using FastAPI, Flask, MySQL, Postman, SQLAlchemy, endpoints, and more. Get proven tips on how to develop analysis applications with pandas, the high-performance Python library featuring robust and integrated built-in data structures. Test out your new coding skills as you go in the exercise challenges at the end of each section. By the end of this course, you’ll be ready to start building full-stack task list applications with Flask, a microframework designed uniquely for Python that lets you integrate data from a database directly to an app.
+
+
+
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
@@ -22,15 +27,16 @@ To resolve this issue:
     Add changes to git using this command: git add .
 	Commit changes using this command: git commit -m "some message"
 
-## Installing
-1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
-2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
 
+### Instructor
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
+Kathryn Hodge 
+                            
+Software Engineer
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+                            
 
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/kathryn-hodge).
+
+[lil-course-url]: https://www.linkedin.com/learning/advanced-python-practical-database-examples?dApp=59033956&leis=LAA
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/D560DAQGTOqAc5WFE5g/learning-public-crop_675_1200/0/1683311050722?e=2147483647&v=beta&t=kqvqGFHLSwn3HG7MRBsT2WzJB_BH99HEt7za4O4nygQ
